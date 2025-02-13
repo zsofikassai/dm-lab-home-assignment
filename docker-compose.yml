@@ -55,5 +55,13 @@ services:
     depends_on:
       - db
 
+  dataloader:
+    build: ./dataloader
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://user:password@db:5432/db
+
 volumes:
   postgres_data:
